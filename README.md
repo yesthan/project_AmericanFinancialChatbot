@@ -9,11 +9,9 @@
 
 - anaconda prompt 실행
 
-'''
-conda create -n [가상환경명] python=3.10
+'''conda create -n [가상환경명] python=3.10
 conda activate [가상환경명]
-pip install -r requirements.txt		# 같은 디렉토리 내에 존재해야 함
-'''
+pip install -r requirements.txt		# 같은 디렉토리 내에 존재해야 함'''
 ----------------------------------------------------------------------
 # 1. 데이터 수집
 - Folder : **01-Crawling**
@@ -32,7 +30,5 @@ pip install -r requirements.txt		# 같은 디렉토리 내에 존재해야 함
 - 실행 전 financial_advisor/settings.py IP 주소를 실행하고자 하는 디바이스의 IP 주소로 반드시 변경
 
 - anaconda prompt 실행
-'''
-conda activate [가상환경명]	# 이미 활성화돼 있다면 무시
-python manage.py runserver localhost:8000	# 혹은 localhost:8080
-'''
+'''conda activate [가상환경명]	# 이미 활성화돼 있다면 무시
+python manage.py runserver localhost:8000	# 혹은 localhost:8080'''
