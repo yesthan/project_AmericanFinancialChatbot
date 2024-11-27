@@ -28,7 +28,6 @@ pip install -r requirements.txt		# 같은 디렉토리 내에 존재해야 함
 # 3. Prototype
 - Folder : **03-Django**
 - Model id : **Bllossom/llama-3.2-Korean-Bllossom-3B**
-
 - 실행 전 financial_advisor/settings.py IP 주소를 실행하고자 하는 디바이스의 IP 주소로 반드시 변경
 
 - anaconda prompt 실행
