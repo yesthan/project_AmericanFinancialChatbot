@@ -34,3 +34,6 @@ pip install -r requirements.txt		# 같은 디렉토리 내에 존재해야 함
 ```conda activate [가상환경명]	# 이미 활성화돼 있다면 무시
 python manage.py runserver localhost:8000	# 혹은 localhost:8080
 ```
+
+# LICENSE
+이 프로젝트는 META LLAMA 3 COMMUNITY, Apache 라이선스를 따릅니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참고해 주세요.
