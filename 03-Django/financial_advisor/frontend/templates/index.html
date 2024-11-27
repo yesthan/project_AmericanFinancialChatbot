@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미국 주식 챗봇 미정이</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8; /* 연보라색 배경 */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            width: 380px;
+            background: #ffffff;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 550px;
+        }
+        h2 {
+            background: linear-gradient(135deg, #d6a6e5, #8e44ad); /* 연보라색 그라데이션 */
+            color: white;
+            padding: 16px;
+            margin: 0;
+            font-size: 20px;
+            text-align: center;
+            border-bottom: 2px solid #9b59b6;
+        }
+        .chat-box {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            border-bottom: 1px solid #eeeeee;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .chat-message {
+            padding: 12px;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background: #FFFFFF; /* 흰색 배경 */
+            align-self: flex-end;
+            border-top-left-radius: 0;
+            border: 2px solid #d6a6e5; /* 연보라색 테두리 */
+            padding: 12px;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        .bot-message {
+            background: #f2e6f7; /* 밝은 연보라색 */
+            align-self: flex-start;
+            border-top-right-radius: 0;
+        }
+        .input-container {
+            display: flex;
+            padding: 8px;
+            background: #f7f7f7;
+            border-top: 1px solid #eeeeee;
+        }
+        #query {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 20px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        #query:focus {
+            border-color: #8e44ad; /* 포커스 시 연보라색 */
+        }
+        #send-button {
+            background: #8e44ad; /* 연보라색 */
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            margin-left: 8px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        #send-button:hover {
+            background: #9b59b6; /* 버튼 hover 시 어두운 연보라색 */
+        }
+        #send-button:active {
+            background: #6c3483; /* 버튼 클릭 시 더 어두운 연보라색 */
+        }
+        @media (max-width: 500px) {
+            .chat-container {
+                width: 90%;
+                height: 480px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h2>미국 주식 챗봇 미정이</h2>
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-container">
+            <input type="text" id="query" placeholder="질문을 입력하세요" required>
+            <button type="submit" id="send-button">전송</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const queryInput = document.getElementById('query');
+        const sendButton = document.getElementById('send-button');
+
+        // 메시지 출력 함수
+        function displayMessage(message, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message');
+            messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            messageDiv.innerText = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight; // 자동 스크롤
+        }
+
+        // 초기 환영 메시지 출력
+        document.addEventListener('DOMContentLoaded', function() {
+            displayMessage('안녕하세요! 저는 미국 주식 챗봇 미정이에요. 무엇을 도와드릴까요?', 'bot');
+        });
+
+        // 질문 제출 함수
+        async function sendQuery() {
+            const query = queryInput.value.trim();
+            if (!query) return;
+
+            // 사용자 메시지 출력
+            displayMessage(query, 'user');
+
+            try {
+                // 서버에 요청 보내기
+                const response = await fetch('/chatbot/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query }),
+                });
+
+                const data = await response.json();
+
+                // 챗봇 응답 출력
+                const responseMessage = data.response || "잘못된 응답이 왔습니다.";
+                displayMessage(responseMessage, 'bot');
+            } catch (error) {
+                console.error('Error:', error);
+                displayMessage("오류가 발생했습니다. 다시 시도해주세요.", 'bot');
+            }
+
+            // 입력 필드 초기화
+            queryInput.value = '';
+        }
+
+        // 버튼 클릭 이벤트
+        sendButton.addEventListener('click', sendQuery);
+
+        // Enter 키 이벤트
+        queryInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') sendQuery();
+        });
+    </script>
+</body>
+</html>
