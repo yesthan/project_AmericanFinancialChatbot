@@ -1,5 +1,6 @@
 # project_AmericanFinancialChatbot
 미국 주식 초보를 위한 미국 주식 정보 챗봇 미정이 프로젝트입니다.
+[미정이 프로젝트 Full Story](https://velog.io/@jiiiw/미국-주식-초보를-위한-주식-정보-제공-챗봇-프로젝트)
 
 # 0. 가상 환경 생성
 - Folder : **00-Conda**
