@@ -1,5 +1,6 @@
 # project_AmericanFinancialChatbot
-미국 주식 초보를 위한 미국 주식 정보 챗봇 미정이 프로젝트입니다.
+미국 주식 초보를 위한 미국 주식 정보 챗봇 미정이 프로젝트입니다.</br>
+[Project Full Story](https://www.behance.net/gallery/216484813/_)
 
 # 0. 가상 환경 생성
 - Folder : **00-Conda**
